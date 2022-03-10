@@ -1,0 +1,20 @@
+html, body {
+  direction: rtl;
+  text-align: right;
+  background-color: eff1f3;
+}
+
+.menu-container {
+  background-color: #223843;
+  color: white;
+  display: grid;
+  grid-template-columns: auto auto auto 1fr;
+}
+
+.menu-item {
+  padding: 20px;
+}
+
+.menu-item-active {
+  border-bottom: 4px solid #00b9ae;
+}
