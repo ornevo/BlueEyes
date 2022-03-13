@@ -24,14 +24,24 @@ class App extends Component {
           words: ["הטעיה", "תירס חם"],
           freq: 52.5,
           time: "11:24",
-          date: '1.2.2020'
+          date: '1.2.2020',
+          id: "abhcdbiabsbds"
+        },
+        {
+          severity: Constants.SEVERITY_LOW,
+          words: ["שקר כלשהוא"],
+          freq: 52.5,
+          time: "15:32",
+          date: '28.1.2020',
+          id: "abhcdbiaasjd4"
         },
         {
           severity: Constants.SEVERITY_MID,
           words: ["מנהרה"],
           freq: 52.5,
           time: "13:51",
-          date: '1.2.2020'
+          date: '1.2.2020',
+          id: "abhcdbiaasjds"
         }
       ]
     }
