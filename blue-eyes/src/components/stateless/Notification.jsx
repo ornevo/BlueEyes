@@ -35,12 +35,12 @@ export default function Notification(props) {
                 </div>
             </div>
             {/* Action buttons */}
-            <div className="grid grid-cols-2">
-                <div className={"border-" + actionColor + " border-2 text-center border-l-0 rounded-br-md p-3"}>
-                    <IconedText icon={CheckCircleIcon} color={actionColor}></IconedText>
+            <div className="grid grid-cols-2 cursor-pointer">
+                <div className={"border-" + actionColor + " border-2 hover:bg-" + color + " text-" + color + " hover:text-white text-center border-l-0 rounded-br-md p-3"}>
+                    <IconedText icon={CheckCircleIcon}></IconedText>
                 </div>
-                <div className={"border-" + actionColor + " border-2 text-center rounded-bl-md p-3"}>
-                    <IconedText icon={EyeIcon} color={actionColor}></IconedText>
+                <div className={"border-" + actionColor + " border-2 hover:bg-" + color + " text-" + color + " hover:text-white text-center rounded-bl-md p-3"}>
+                    <IconedText icon={EyeIcon} ></IconedText>
                 </div>
             </div>
         </div>
