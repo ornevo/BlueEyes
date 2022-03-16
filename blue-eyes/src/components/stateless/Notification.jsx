@@ -1,26 +1,16 @@
 import Constants from "../../constants";
 import Token from "./Token";
 import { ClockIcon, WifiIcon, CalendarIcon, LocationMarkerIcon, CheckCircleIcon, EyeIcon } from '@heroicons/react/solid'
-
-
-const IconedText = ({icon, children, color}) => {
-    const IconElem = icon;
-    return (
-        <span>
-            <IconElem className={"h-6 mx-1 w-6 inline text-" + color}/>
-            {children}
-        </span>
-    )
-}
-
+import IconedText from "./IconedText";
+import constants from "../../constants";
 
 export default function Notification(props) {
     const sever = props.data.severity;
-    const color = sever === Constants.SEVERITY_HIGH ? "red-500" :
-                    sever === Constants.SEVERITY_MID ? "orange-400" : "emerald-500";
+    const color = Constants.SEVERITY_TO_COLOR[sever];
+    
     const actionColor = color;
     return (
-        <div className="notification-cont rounded-md bg-white p-1 drop-shadow">
+        <div className="notification-cont rounded-md bg-white p-1 drop-shadow select-none">
             <div className={"rounded-t-md bg-white p-3 border-" + color + " border-2 border-b-0 "}>
                 {/* words */}
                 <div className="gap-1 mb-3">

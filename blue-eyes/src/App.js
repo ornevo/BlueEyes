@@ -4,6 +4,7 @@ import Menu from "./components/stateless/Menu";
 import Pallete from "./components/stateless/Pallete"; 
 import Constants from "./constants";
 import NotificationsBody from "./components/stateful/NotificationsBody";
+import WordsBody from "./components/stateful/WordsBody";
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +20,28 @@ class App extends Component {
     */
     this.state = {
       page: Constants.PAGE_NOTF,
+      words: [
+        {
+          id: "aaaa",
+          word: "תירס חם",
+          severity: Constants.SEVERITY_MID
+        },
+        {
+          id: "aaab",
+          word: "הטעיה",
+          severity: Constants.SEVERITY_HIGH
+        },
+        {
+          id: "aaac",
+          word: "שקר כלשהוא",
+          severity: Constants.SEVERITY_LOW
+        },
+        {
+          id: "aaad",
+          word: "מנהרה",
+          severity: Constants.SEVERITY_MID
+        },
+      ],
       notifications: [
         {
           severity: Constants.SEVERITY_HIGH,
@@ -51,15 +74,17 @@ class App extends Component {
     }
   }
 
+  onPageSwitch(newPage) { this.setState({page: newPage}); }
+
   render() {
     return (
       <div className="App">
         <Pallete/>
-        <Menu page={this.state.page}/>
+        <Menu page={this.state.page} onPageSwitch={this.onPageSwitch.bind(this)}/>
         {
           this.state.page == Constants.PAGE_NOTF ? 
           <NotificationsBody notifications={this.state.notifications}/> :
-          "Not implemented"
+          <WordsBody words={this.state.words} />
         }
       </div>
     );

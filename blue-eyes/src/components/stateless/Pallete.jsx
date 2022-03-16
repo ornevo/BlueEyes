@@ -20,6 +20,10 @@ export default function() {
 
             <span className="bg-sky-700 text-sky-700 border-sky-700"></span>
             <span className="bg-white text-white border-white"></span>
+
+            <span className="bg-gray-500 text-gray-500 border-gray-500"></span>
+            
+            <span className="bg-emerald-500 text-emerald-500 border-emerald-500"></span>
         </span>
     )
 }
