@@ -20,7 +20,7 @@ function WordTableRow({word, editMode, disableEdit, onEdit, onWordFieldChange, o
     // word itself as input or label
     let wordName = '';
     if(editMode)
-        wordName = <input className="px-3 border-white focus:outline-0" value={word.word} autoFocus onChange={c => onWordFieldChange('word', c.target.value)} />;
+        wordName = <input className="px-3 border-white focus:outline-0 focus:border-b-2 border-black" value={word.word} placeholder="הכנס מילה" autoFocus onChange={c => onWordFieldChange('word', c.target.value)} />;
     else
         wordName = <span className="px-3">{word.word}</span>;
 
@@ -32,7 +32,7 @@ function WordTableRow({word, editMode, disableEdit, onEdit, onWordFieldChange, o
     severityToRoundedStyle[Constants.SEVERITY_HIGH] = "rounded-r-none";
     severityToRoundedStyle[Constants.SEVERITY_MID] = "rounded-none";
     severityToRoundedStyle[Constants.SEVERITY_LOW] = "rounded-l-none";
-    console.log(severityToRoundedStyle);
+    
     if(editMode) 
         severToken = (
             <span style={{margin: "2px 0"}}>

@@ -5,7 +5,7 @@ import WordTableRow from "../stateless/WordTableRow";
 function PlusButton({onClick}) {
     return (
         <div onClick={onClick}
-                className="grid cursor-pointer mx-4 place-items-center rounded-full bg-emerald-500 select-none w-12 h-12 text-2xl text-white"
+                className="grid shadow-lg cursor-pointer mx-4 place-items-center rounded-full bg-emerald-500 select-none w-12 h-12 text-2xl text-white"
         >
             +
         </div>
@@ -33,35 +33,57 @@ class WordsBody extends Component {
         })
     }
 
+    cloneWord(word) {
+        if(word === undefined) return word;
+        var ret = {};
+        Object.assign(ret, word);
+        return ret;
+    }
+    
+    componentDidUpdate(previousProps) {
+        // Check if added word to put in edit word the new word
+        if(previousProps.words.length < this.props.words.length)
+            this.setState({editedWord: this.cloneWord(this.props.words[0])});
+    }
+
     onEdit(wId) {
-        this.setState({editedWord: (this.props.words.filter(w => w.id === wId) || [undefined])[0]});
+        this.setState({editedWord: this.cloneWord((this.props.words.filter(w => w.id === wId) || [undefined])[0])});
     }
 
     onWordFieldChange(field, value) {
         let currEditedWord = this.state.editedWord;
         if(currEditedWord === undefined) {
-            console.log("Weird: for some reason tried to edit word while WordsBody container component was not in edit mode");
             return;
         }
         currEditedWord[field] = value;
-        console.log(this.state.editedWord, currEditedWord);
         this.setState({editedWord: currEditedWord});
+    }
+
+    applyEdit() {
+        let newWords = this.props.words.map(w => (
+            w.id === this.state.editedWord.id ? 
+            this.state.editedWord : 
+            this.cloneWord(w)
+        ));
+        this.props.updateWords(newWords, () => {
+            this.setState({editedWord: undefined});
+        });
     }
 
     render() {
         return (
             <div className="p-5">
                 <div className="grid grid-cols-[auto_1fr] mb-5">
-                    <PlusButton/>
-                    <input className="my-1 py-1 px-3" placeholder="חיפוש..." onChange={this.onSearchTemUpdate.bind(this)} type="text"/>
+                    <PlusButton onClick={this.props.addNewWord}/>
+                    <input className="my-1 shadow py-1 px-3" placeholder="חיפוש..." onChange={this.onSearchTemUpdate.bind(this)} type="text"/>
                 </div>
-                {/* TODO: filtering, sorting, etc... */}
+                {/* TODO: sorting */}
                 {this.props.words.filter(w => w.word.indexOf(this.state.searchTerm) !== -1).map(w => (
                     (this.state.editedWord !== undefined && this.state.editedWord.id === w.id)
                     ?
                     <WordTableRow word={this.state.editedWord} key={w.id}
                             editMode={true} onWordFieldChange={this.onWordFieldChange.bind(this)}
-                            onDoneEditing={() => this.setState({editedWord: undefined})} />
+                            onDoneEditing={this.applyEdit.bind(this)} />
                     :
                     <WordTableRow word={w} key={w.id} editMode={false} disableEdit={this.state.editedWord !== undefined} onEdit={this.onEdit.bind(this)}/>
                 ))}

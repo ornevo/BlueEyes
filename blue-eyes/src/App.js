@@ -76,6 +76,20 @@ class App extends Component {
 
   onPageSwitch(newPage) { this.setState({page: newPage}); }
 
+  addNewWord() {
+    let newWord = {
+      id: "random-id-placeholder-" + Math.floor(Math.random() * 10000),
+      word: "",
+      severity: Constants.SEVERITY_LOW
+    };
+
+    this.setState({words: [newWord, ...this.state.words]});
+  }
+
+  updateWords(newWords, callback) {
+    this.setState({words: newWords}, callback());
+  }
+
   render() {
     return (
       <div className="App">
@@ -84,7 +98,7 @@ class App extends Component {
         {
           this.state.page == Constants.PAGE_NOTF ? 
           <NotificationsBody notifications={this.state.notifications}/> :
-          <WordsBody words={this.state.words} />
+          <WordsBody updateWords={this.updateWords.bind(this)} addNewWord={this.addNewWord.bind(this)} words={this.state.words} />
         }
       </div>
     );
