@@ -14,7 +14,11 @@ export default function Notification(props) {
             <div className={"rounded-t-md bg-white p-3 border-" + color + " border-2 border-b-0 "}>
                 {/* words */}
                 <div className="gap-1 mb-3">
-                    {props.data.words.map(word => <Token color={color}>{word}</Token>)}
+                    {props.data.words.map(wId => {
+                        let word = props.words.find(w => w.id === wId);
+                        if(!word) return "";
+                        return <Token color={Constants.SEVERITY_TO_COLOR[word.severity]}>{word.word}</Token>;
+                    })}
                 </div>
                 {/* data */}
                 <div className="grid grid-cols-2 justify-center gap-1 grid-rows-2">

@@ -45,7 +45,7 @@ class App extends Component {
       notifications: [
         {
           severity: Constants.SEVERITY_HIGH,
-          words: ["הטעיה", "תירס חם"],
+          words: ["aaaa", "aaab"],
           freq: 52.5,
           time: "11:24",
           date: '1.2.2020',
@@ -54,7 +54,7 @@ class App extends Component {
         },
         {
           severity: Constants.SEVERITY_LOW,
-          words: ["שקר כלשהוא"],
+          words: ["aaac"],
           freq: 52.5,
           time: "15:32",
           date: '28.1.2020',
@@ -63,7 +63,7 @@ class App extends Component {
         },
         {
           severity: Constants.SEVERITY_MID,
-          words: ["מנהרה"],
+          words: ["aaad"],
           freq: 52.5,
           time: "13:51",
           date: '1.2.2020',
@@ -97,7 +97,7 @@ class App extends Component {
         <Menu page={this.state.page} onPageSwitch={this.onPageSwitch.bind(this)}/>
         {
           this.state.page == Constants.PAGE_NOTF ? 
-          <NotificationsBody notifications={this.state.notifications}/> :
+          <NotificationsBody words={this.state.words} notifications={this.state.notifications}/> :
           <WordsBody updateWords={this.updateWords.bind(this)} addNewWord={this.addNewWord.bind(this)} words={this.state.words} />
         }
       </div>

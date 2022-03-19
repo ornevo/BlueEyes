@@ -13,7 +13,7 @@ class NotificationsBody extends Component {
             <div className="grid grid-cols-4 gap-8 p-5">
                 {/* TODO: filtering, sorting, etc... */}
                 {this.props.notifications.map(not => (
-                    <Notification data={not} key={not.id}/>
+                    <Notification data={not} words={this.props.words} key={not.id}/>
                 ))}
             </div>
         );
