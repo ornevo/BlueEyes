@@ -3,7 +3,7 @@ import Token from "../stateless/Token";
 import { XIcon, PencilIcon, CheckIcon } from '@heroicons/react/solid'
 
 
-function WordTableRow({word, editMode, disableEdit, onEdit, onWordFieldChange, onDoneEditing}) {
+function WordTableRow({word, editMode, disableEdit, onEdit, onWordFieldChange, onDelete, onDoneEditing}) {
     const color = Constants.SEVERITY_TO_COLOR[word.severity];
 
     // Action icon
@@ -32,7 +32,7 @@ function WordTableRow({word, editMode, disableEdit, onEdit, onWordFieldChange, o
     severityToRoundedStyle[Constants.SEVERITY_HIGH] = "rounded-r-none";
     severityToRoundedStyle[Constants.SEVERITY_MID] = "rounded-none";
     severityToRoundedStyle[Constants.SEVERITY_LOW] = "rounded-l-none";
-    
+
     if(editMode) 
         severToken = (
             <span style={{margin: "2px 0"}}>
@@ -71,7 +71,7 @@ function WordTableRow({word, editMode, disableEdit, onEdit, onWordFieldChange, o
             <span></span>
 
             {/* Delete icon */}
-            <XIcon className={"h-6 cursor-pointer mx-1 w-6"}/>
+            <XIcon onClick={() => onDelete(word.id)} className={"h-6 cursor-pointer mx-1 w-6"}/>
         </div>
     )
 }

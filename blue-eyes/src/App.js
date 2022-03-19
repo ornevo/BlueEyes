@@ -87,7 +87,7 @@ class App extends Component {
   }
 
   updateWords(newWords, callback) {
-    this.setState({words: newWords}, callback());
+    this.setState({words: newWords}, callback ? callback() : undefined);
   }
 
   render() {

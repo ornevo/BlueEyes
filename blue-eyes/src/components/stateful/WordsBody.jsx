@@ -70,6 +70,14 @@ class WordsBody extends Component {
         });
     }
 
+    onWordDelete(wId) {
+        let newWords = this.props.words.filter(w => w.id !== wId).map(this.cloneWord);
+        if(this.state.editedWord && this.state.editedWord.id === wId)
+            this.setState({editedWord: undefined}, () => this.props.updateWords(newWords));
+        else
+            this.props.updateWords(newWords);
+    }
+
     render() {
         return (
             <div className="p-5">
@@ -83,9 +91,11 @@ class WordsBody extends Component {
                     ?
                     <WordTableRow word={this.state.editedWord} key={w.id}
                             editMode={true} onWordFieldChange={this.onWordFieldChange.bind(this)}
-                            onDoneEditing={this.applyEdit.bind(this)} />
+                            onDoneEditing={this.applyEdit.bind(this)} onDelete={this.onWordDelete.bind(this)}/>
                     :
-                    <WordTableRow word={w} key={w.id} editMode={false} disableEdit={this.state.editedWord !== undefined} onEdit={this.onEdit.bind(this)}/>
+                    <WordTableRow word={w} key={w.id} editMode={false}
+                            disableEdit={this.state.editedWord !== undefined}
+                            onEdit={this.onEdit.bind(this)} onDelete={this.onWordDelete.bind(this)}/>
                 ))}
             </div>
         );
