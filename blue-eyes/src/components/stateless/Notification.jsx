@@ -16,7 +16,7 @@ export default function Notification(props) {
                     {props.data.words.map(wId => {
                         let word = props.words.find(w => w.id === wId);
                         if(!word) return "";
-                        return <Token color={Constants.SEVERITY_TO_COLOR[word.severity]}>{word.word}</Token>;
+                        return <Token color={Constants.SEVERITY_TO_COLOR[word.severity]} key={word.id}>{word.word}</Token>;
                     })}
                 </div>
                 {/* data */}
@@ -33,7 +33,8 @@ export default function Notification(props) {
                      className={"border-" + actionColor + " border-2 hover:bg-" + color + " text-" + color + " hover:text-white text-center border-l-0 rounded-br-md p-3"}>
                     <IconedText icon={CheckCircleIcon}></IconedText>
                 </div>
-                <div className={"border-" + actionColor + " border-2 hover:bg-" + color + " text-" + color + " hover:text-white text-center rounded-bl-md p-3"}>
+                <div onClick={() => props.onView(props.data.id)}   
+                     className={"border-" + actionColor + " border-2 hover:bg-" + color + " text-" + color + " hover:text-white text-center rounded-bl-md p-3"}>
                     <IconedText icon={EyeIcon} ></IconedText>
                 </div>
             </div>

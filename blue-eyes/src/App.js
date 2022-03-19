@@ -20,6 +20,7 @@ class App extends Component {
     */
     this.state = {
       page: Constants.PAGE_NOTF,
+      popupOpen: false,
       words: [
         {
           id: "aaaa",
@@ -94,14 +95,16 @@ class App extends Component {
     this.setState({notifications: this.state.notifications.filter(n => n.id !== notifId)});
   }
 
+  setPopupOpen(newVal) { this.setState({popupOpen: newVal}); }
+
   render() {
     return (
       <div className="App">
         <Pallete/>
-        <Menu page={this.state.page} onPageSwitch={this.onPageSwitch.bind(this)}/>
+        <Menu page={this.state.page} onPageSwitch={this.onPageSwitch.bind(this)} blur={(this.state.popupOpen)}/>
         {
           this.state.page == Constants.PAGE_NOTF ? 
-          <NotificationsBody markNotificationAsRead={this.dismissNotif.bind(this)} words={this.state.words} notifications={this.state.notifications}/> :
+          <NotificationsBody setPopupOpen={this.setPopupOpen.bind(this)} markNotificationAsRead={this.dismissNotif.bind(this)} words={this.state.words} notifications={this.state.notifications}/> :
           <WordsBody updateWords={this.updateWords.bind(this)} addNewWord={this.addNewWord.bind(this)} words={this.state.words} />
         }
       </div>
