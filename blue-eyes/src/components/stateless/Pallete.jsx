@@ -22,7 +22,7 @@ export default function() {
             <span className="bg-white text-white border-white"></span>
 
             <span className="bg-gray-500 text-gray-500 border-gray-500"></span>
-            
+
             <span className="bg-emerald-500 text-emerald-500 border-emerald-500"></span>
         </span>
     )
