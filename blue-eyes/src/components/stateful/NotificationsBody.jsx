@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import Notification from "../stateless/Notification";
+import NotificationPopupContent from "../stateless/NotificationPopupContent";
 import Popup from "../stateless/Popup";
+import 'react-h5-audio-player/lib/styles.css';
 
 
 class NotificationsBody extends Component {
@@ -20,12 +22,14 @@ class NotificationsBody extends Component {
     }
 
     render() {
+        const viewedNot = this.state.viewedNotId &&
+                            this.props.notifications.find(n => n.id === this.state.viewedNotId);
         return (
             <div>
                 {
-                    this.state.viewedNotId && (
+                    viewedNot && (
                         <Popup onClose={this.onViewClose.bind(this)} >
-                            check
+                            <NotificationPopupContent words={this.props.words} notification={viewedNot} />
                         </Popup>
                     )
                 }

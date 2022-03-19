@@ -51,7 +51,9 @@ class App extends Component {
           time: "11:24",
           date: '1.2.2020',
           location: "מוצב חרמון",
-          id: "abhcdbiabsbds"
+          id: "abhcdbiabsbds",
+          audio: 'http://www.hochmuth.com/mp3/Tchaikovsky_Nocturne__orch.mp3',
+          text: 'יוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\nיוסי המניאק\n'
         },
         {
           severity: Constants.SEVERITY_LOW,
@@ -60,7 +62,9 @@ class App extends Component {
           time: "15:32",
           date: '28.1.2020',
           location: "חטמ\"ר שומרון",
-          id: "abhcdbiaasjd4"
+          id: "abhcdbiaasjd4",
+          audio: 'http://www.hochmuth.com/mp3/Tchaikovsky_Nocturne__orch.mp3',
+          text: 'placeholder'
         },
         {
           severity: Constants.SEVERITY_MID,
@@ -69,7 +73,9 @@ class App extends Component {
           time: "13:51",
           date: '1.2.2020',
           location: "מרחב דרום",
-          id: "abhcdbiaasjds"
+          id: "abhcdbiaasjds",
+          audio: 'http://www.hochmuth.com/mp3/Tchaikovsky_Nocturne__orch.mp3',
+          text: 'placeholder'
         }
       ]
     }
