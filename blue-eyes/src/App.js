@@ -90,6 +90,10 @@ class App extends Component {
     this.setState({words: newWords}, callback ? callback() : undefined);
   }
 
+  dismissNotif(notifId) {
+    this.setState({notifications: this.state.notifications.filter(n => n.id !== notifId)});
+  }
+
   render() {
     return (
       <div className="App">
@@ -97,7 +101,7 @@ class App extends Component {
         <Menu page={this.state.page} onPageSwitch={this.onPageSwitch.bind(this)}/>
         {
           this.state.page == Constants.PAGE_NOTF ? 
-          <NotificationsBody words={this.state.words} notifications={this.state.notifications}/> :
+          <NotificationsBody markNotificationAsRead={this.dismissNotif.bind(this)} words={this.state.words} notifications={this.state.notifications}/> :
           <WordsBody updateWords={this.updateWords.bind(this)} addNewWord={this.addNewWord.bind(this)} words={this.state.words} />
         }
       </div>
