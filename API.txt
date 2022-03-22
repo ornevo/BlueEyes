@@ -1,10 +1,22 @@
 - WEBSOCKET based
+
 - fetching words
-- adding a word - severity + word
 - server sends a push each time the notifications are updated
+{
+    words: [word, word, word],
+    notifications: [notif, notif]
+}
+
+- "new-word" (empty)
+- "edit-word" edit a word by id
+{
+    word fields
+}
+
 - mark notification as done
-- fetch text and audio of a notification
-- submit audio sample
+{ id: "ididid" }
+
+# - submit audio sample
 
 format of a notification:
 {
