@@ -2,9 +2,13 @@ import IconedText from "../stateless/IconedText";
 import WordTokenList from "../stateless/WordTokenList";
 import { ClockIcon, WifiIcon, CalendarIcon, LocationMarkerIcon, CheckCircleIcon, EyeIcon } from '@heroicons/react/solid'
 import AudioPlayer from 'react-h5-audio-player';
+import Constants from "../../constants";
+import Token from "./Token";
 
 
 export default function NotificationPopupContent({words, notification}) {
+    const txtWords = notification.words.map(wid => words.find(w => w.id === wid).word);
+
     return (
         <div className="">
             {/* Metadate */}
@@ -24,11 +28,20 @@ export default function NotificationPopupContent({words, notification}) {
             <div className="my-4">
                 <h3 className="text-gray-700 text-lg">תמלול השיחה</h3>
                 <div className="border-gray-400 border-2 p-4 rounded">
-                    {notification.text.split("\n").map(t => (
-                        <span>{t}<br/></span>
-                    ))}
+                    {notification.text.split("\n").map(t => {
+                        return <span>{
+                            t.split(" ").map(tpart => {
+                                const foundWord = words.find(w => w.word === tpart);
+                                return foundWord !== undefined ? 
+                                <Token color={Constants.SEVERITY_TO_COLOR[foundWord.severity]}>{tpart}</Token> :
+                                tpart + " "
+                            })
+                        }<br/></span>;
+                    })}
                 </div>
             </div>
+
+            <span></span>
 
             {/* Audio player */}
             <span style={{direction: "ltr"}}>

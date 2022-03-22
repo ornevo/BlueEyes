@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Notification from "../stateless/Notification";
 import NotificationPopupContent from "../stateless/NotificationPopupContent";
 import Popup from "../stateless/Popup";
+import { wrapGrid } from 'animate-css-grid'
 import 'react-h5-audio-player/lib/styles.css';
 
 
@@ -29,6 +30,10 @@ class NotificationsBody extends Component {
 
     componentDidMount() {
         this.autoOpenNotifIfNeeded({})
+        
+        const grid = document.getElementById("notifGrid");
+        wrapGrid(grid);
+        console.log('Wrapped!');
     }
 
     componentDidUpdate(previousProps) {
@@ -48,7 +53,7 @@ class NotificationsBody extends Component {
                     )
                 }
 
-                <div className={"grid grid-cols-4 gap-8 p-5 " + (this.state.viewedNotId !== undefined && " blur")}>
+                <div id="notifGrid" className={"grid grid-cols-4 gap-8 p-5 " + (this.state.viewedNotId !== undefined && " blur")}>
                     {/* TODO: filtering, sorting, etc... */}
                     {this.props.notifications.map(not => (
                         <Notification data={not} markNotificationAsRead={this.props.markNotificationAsRead}
