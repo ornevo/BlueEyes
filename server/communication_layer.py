@@ -6,6 +6,7 @@ import hashlib
 
 
 words = []
+notifications = []
 
 
 def connection_id_generator():
@@ -61,17 +62,11 @@ def _edit_word():
     words[int(id_)] = (id_, word, severity)
 
 
-@serverSocket.on('join')
-def on_join(data):
-    flask_socketio.join_room(data)
+@app.route('/state', methods=['GET'])
+def _get_state():
+    response = {'words': words, 'notifications': notifications}
+    return response
 
-
-def send(self, connection_id, message):
-    self.socket.emit('notification', f'Notification: {message}', room=connection_id)
-
-
-# def update_statistics(self, connection_id, stat_string):
-#     self.socket.emit('update_statistics', stat_string, room=connection_id)
 
 
 def main():
