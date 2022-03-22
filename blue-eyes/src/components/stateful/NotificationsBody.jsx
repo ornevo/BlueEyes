@@ -21,6 +21,20 @@ class NotificationsBody extends Component {
         this.setState({viewedNotId: undefined}, () => this.props.setPopupOpen(false));
     }
 
+    autoOpenNotifIfNeeded(previousProps) {
+        // Check for auto focus on notification when clicking on notification alert
+        if(this.props.autoOpenNotif && this.props.autoOpenNotif !== previousProps.autoOpenNotif)
+            this.onView(this.props.autoOpenNotif);
+    }
+
+    componentDidMount() {
+        this.autoOpenNotifIfNeeded({})
+    }
+
+    componentDidUpdate(previousProps) {
+        this.autoOpenNotifIfNeeded(previousProps)
+    }
+
     render() {
         const viewedNot = this.state.viewedNotId &&
                             this.props.notifications.find(n => n.id === this.state.viewedNotId);

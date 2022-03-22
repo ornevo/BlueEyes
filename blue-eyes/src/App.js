@@ -6,6 +6,10 @@ import Constants from "./constants";
 import NotificationsBody from "./components/stateful/NotificationsBody";
 import WordsBody from "./components/stateful/WordsBody";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +25,7 @@ class App extends Component {
     this.state = {
       page: Constants.PAGE_NOTF,
       popupOpen: false,
+      newNotificationId: undefined,
       words: [
         {
           id: "aaaa",
@@ -84,21 +89,49 @@ class App extends Component {
   onPageSwitch(newPage) { this.setState({page: newPage}); }
 
   addNewWord() {
+    // TODO: API this
     let newWord = {
       id: "random-id-placeholder-" + Math.floor(Math.random() * 10000),
       word: "",
       severity: Constants.SEVERITY_LOW
     };
-
+    this.notifyNewNotif(this.state.notifications[0]);
     this.setState({words: [newWord, ...this.state.words]});
   }
 
+  showNotif(notId) {
+    this.setState({
+      newNotificationId: notId,
+      page: Constants.PAGE_NOTF
+    });
+  }
+
+  notifyNewNotif(notif) {
+    const words = notif.words.map(wid => this.state.words.find(w => w.id === wid).word);
+    const msg = 'התראה על המיל' + (words.length === 1 ? "ה" : "ים") + " " + words.join(", ");
+    toast.info(msg, {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      onClick: () => this.showNotif(notif.id),
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
   updateWords(newWords, callback) {
+    // TODO: API this
     this.setState({words: newWords}, callback ? callback() : undefined);
   }
 
   dismissNotif(notifId) {
-    this.setState({notifications: this.state.notifications.filter(n => n.id !== notifId)});
+    // TODO: API this
+    this.setState({
+      notifications: this.state.notifications.filter(n => n.id !== notifId),
+      newNotificationId: undefined
+    });
   }
 
   setPopupOpen(newVal) { this.setState({popupOpen: newVal}); }
@@ -107,10 +140,23 @@ class App extends Component {
     return (
       <div className="App">
         <Pallete/>
+        <ToastContainer
+          position="top-left"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
+
+        {/* Actual content */}
         <Menu page={this.state.page} onPageSwitch={this.onPageSwitch.bind(this)} blur={(this.state.popupOpen)}/>
         {
           this.state.page == Constants.PAGE_NOTF ? 
-          <NotificationsBody setPopupOpen={this.setPopupOpen.bind(this)} markNotificationAsRead={this.dismissNotif.bind(this)} words={this.state.words} notifications={this.state.notifications}/> :
+          <NotificationsBody autoOpenNotif={this.state.newNotificationId} setPopupOpen={this.setPopupOpen.bind(this)} markNotificationAsRead={this.dismissNotif.bind(this)} words={this.state.words} notifications={this.state.notifications}/> :
           <WordsBody updateWords={this.updateWords.bind(this)} addNewWord={this.addNewWord.bind(this)} words={this.state.words} />
         }
       </div>
