@@ -10,7 +10,9 @@
 - "new-word" (empty)
 - "edit-word" edit a word by id
 {
-    word fields
+    string: "the-word"
+    severity: 1/2/3
+
 }
 
 - mark notification as done
